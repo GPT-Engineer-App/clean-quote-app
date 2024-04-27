@@ -81,7 +81,9 @@ const Index = () => {
           ) : (
             <Text>No listings available yet.</Text>
           )}
-          <Link color="teal.500" href="#" mt={3} onClick={() => alert('Feature coming soon!')}><FaListAlt /> View All Listings</Link>
+          <Button colorScheme="teal" mt={3} onClick={() => alert('All listings feature is currently under development.')}>
+            <FaListAlt /> View All Listings
+          </Button>
         </Box>
       </VStack>
     </Box>
