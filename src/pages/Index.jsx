@@ -1,5 +1,5 @@
 import { Box, Flex, Heading, Text, Button, Image, FormControl, FormLabel, Input, Checkbox, Select, useToast, VStack } from "@chakra-ui/react";
-import { FaPlus } from "react-icons/fa";
+import { FaPlus, FaHome } from "react-icons/fa";
 import { useState } from "react";
 
 const Index = () => {
