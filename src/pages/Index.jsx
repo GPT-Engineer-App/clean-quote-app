@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, Text, Input, Button, Checkbox, Stack, FormControl, FormLabel, NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper } from "@chakra-ui/react";
+import { Box, Flex, Heading, Text, Input, Button, Checkbox, Stack, FormControl, FormLabel, NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper, SimpleGrid, Image } from "@chakra-ui/react";
 import { useState } from "react";
 
 const Index = () => {
@@ -7,8 +7,11 @@ const Index = () => {
   const [rooms, setRooms] = useState(1);
   const [cleaningRequired, setCleaningRequired] = useState(false);
   const [bedSheets, setBedSheets] = useState(false);
+  const [listings, setListings] = useState([]);
 
   const handleSubmit = () => {
+    const newListing = { address, size, rooms, cleaningRequired, bedSheets };
+    setListings([...listings, newListing]);
     alert(`Listing created for address: ${address} with size: ${size} sqm and ${rooms} rooms. Cleaning required: ${cleaningRequired}, Bed sheets: ${bedSheets}`);
   };
 
@@ -49,6 +52,20 @@ const Index = () => {
           </Checkbox>
           <Button colorScheme="blue" onClick={handleSubmit}>Submit Listing</Button>
         </Stack>
+      </Box>
+      <Box w="full" maxW="4xl" mt={10}>
+        <Heading mb={4}>Listings</Heading>
+        <SimpleGrid columns={3} spacing={10}>
+          {listings.map((listing, index) => (
+            <Box key={index} p={5} shadow="md" borderWidth="1px">
+              <Heading fontSize="xl">{listing.address}</Heading>
+              <Text mt={4}>Size: {listing.size} sqm</Text>
+              <Text>Rooms: {listing.rooms}</Text>
+              <Text>Cleaning: {listing.cleaningRequired ? 'Required' : 'Not Required'}</Text>
+              <Text>Bed Sheets: {listing.bedSheets ? 'Provided' : 'Not Provided'}</Text>
+            </Box>
+          ))}
+        </SimpleGrid>
       </Box>
     </Flex>
   );
