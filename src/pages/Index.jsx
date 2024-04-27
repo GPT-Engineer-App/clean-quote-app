@@ -13,6 +13,8 @@ const Index = () => {
     bedSheets: false
   });
 
+  const [apartments, setApartments] = useState([]);
+
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setApartment(prev => ({
@@ -31,6 +33,7 @@ const Index = () => {
       duration: 5000,
       isClosable: true,
     });
+    setApartments([...apartments, apartment]);
   };
 
   return (
@@ -59,6 +62,18 @@ const Index = () => {
             Get Quote
           </Button>
         </FormControl>
+        <VStack mt={10} spacing={4}>
+          {apartments.map((apt, index) => (
+            <Box key={index} p={5} shadow="md" borderWidth="1px">
+              <Text fontWeight="bold">Address: {apt.address}</Text>
+              <Text>Size: {apt.size} sqm</Text>
+              <Text>Rooms: {apt.rooms}</Text>
+              <Text>Cleaning Frequency: {apt.frequency}</Text>
+              <Text>Cleaning Supplies: {apt.cleaningSupplies ? 'Provided' : 'Not Provided'}</Text>
+              <Text>Bed Sheets: {apt.bedSheets ? 'Provided' : 'Not Provided'}</Text>
+            </Box>
+          ))}
+        </VStack>
       </Box>
     </Box>
   );
