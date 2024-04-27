@@ -24,10 +24,11 @@ const Index = () => {
   };
 
   const handleSubmit = () => {
-    // Mock function to simulate getting quotes
+    // Simulate a more realistic quote retrieval process
+    const quote = `Estimated cleaning cost: $${(parseInt(apartment.size) * 0.5).toFixed(2)}`;
     toast({
       title: "Quotes Retrieved",
-      description: "Cleaning quotes based on your apartment details have been retrieved.",
+      description: quote,
       status: "success",
       duration: 5000,
       isClosable: true,
