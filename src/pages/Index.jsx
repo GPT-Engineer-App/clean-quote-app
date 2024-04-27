@@ -13,6 +13,8 @@ const Index = () => {
     bedSheets: false
   });
 
+  const [apartments, setApartments] = useState([]);
+
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setApartment(prev => ({
@@ -30,6 +32,7 @@ const Index = () => {
       duration: 5000,
       isClosable: true,
     });
+    setApartments([...apartments, apartment]);
   };
 
   return (
@@ -63,7 +66,20 @@ const Index = () => {
         </Box>
         <Box w="full">
           <Heading size="lg" mb={5}>Browse Apartments</Heading>
-          <Text>No listings available yet.</Text>
+          {apartments.length > 0 ? (
+            apartments.map((apt, index) => (
+              <Box key={index} p={5} shadow="md" borderWidth="1px">
+                <Text fontWeight="bold">Address: {apt.address}</Text>
+                <Text>Size: {apt.size} sqm</Text>
+                <Text>Rooms: {apt.rooms}</Text>
+                <Text>Cleaning Frequency: {apt.frequency}</Text>
+                <Text>Cleaning Supplies: {apt.cleaningSupplies ? 'Provided' : 'Not Provided'}</Text>
+                <Text>Bed Sheets: {apt.bedSheets ? 'Provided' : 'Not Provided'}</Text>
+              </Box>
+            ))
+          ) : (
+            <Text>No listings available yet.</Text>
+          )}
           <Link color="teal.500" href="#" mt={3}><FaListAlt /> View All Listings</Link>
         </Box>
       </VStack>
