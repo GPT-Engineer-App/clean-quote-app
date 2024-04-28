@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, Text, Input, Button, Checkbox, Stack, FormControl, FormLabel, NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper, SimpleGrid, Image, Link } from "@chakra-ui/react";
+import { Box, Flex, Heading, Text, Input, Button, Checkbox, Stack, FormControl, FormLabel, NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper, SimpleGrid, Image, Link, useDisclosure, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton } from "@chakra-ui/react";
 import { useState } from "react";
 
 const Index = () => {
@@ -8,11 +8,18 @@ const Index = () => {
   const [cleaningRequired, setCleaningRequired] = useState(false);
   const [bedSheets, setBedSheets] = useState(false);
   const [listings, setListings] = useState([]);
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [selectedListing, setSelectedListing] = useState(null);
 
   const handleSubmit = () => {
     const newListing = { address, size, rooms, cleaningRequired, bedSheets };
     setListings([...listings, newListing]);
     alert(`Listing created for address: ${address} with size: ${size} sqm and ${rooms} rooms. Cleaning required: ${cleaningRequired}, Bed sheets: ${bedSheets}`);
+  };
+
+  const handleViewDetails = (listing) => {
+    setSelectedListing(listing);
+    onOpen();
   };
 
   return (
@@ -63,11 +70,32 @@ const Index = () => {
               <Text>Rooms: {listing.rooms}</Text>
               <Text>Cleaning: {listing.cleaningRequired ? 'Required' : 'Not Required'}</Text>
               <Text>Bed Sheets: {listing.bedSheets ? 'Provided' : 'Not Provided'}</Text>
-              <Link color="teal.500" href="#">View Details</Link>
+              <Button color="teal.500" onClick={() => handleViewDetails(listing)}>View Details</Button>
             </Box>
           ))}
         </SimpleGrid>
       </Box>
+      {selectedListing && (
+        <Modal isOpen={isOpen} onClose={onClose}>
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader>Listing Details</ModalHeader>
+            <ModalCloseButton />
+            <ModalBody>
+              <Text><strong>Address:</strong> {selectedListing.address}</Text>
+              <Text><strong>Size:</strong> {selectedListing.size} sqm</Text>
+              <Text><strong>Rooms:</strong> {selectedListing.rooms}</Text>
+              <Text><strong>Cleaning Required:</strong> {selectedListing.cleaningRequired ? 'Yes' : 'No'}</Text>
+              <Text><strong>Bed Sheets Provided:</strong> {selectedListing.bedSheets ? 'Yes' : 'No'}</Text>
+            </ModalBody>
+            <ModalFooter>
+              <Button colorScheme="blue" mr={3} onClick={onClose}>
+                Close
+              </Button>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
+      )}
     </Flex>
   );
 };
