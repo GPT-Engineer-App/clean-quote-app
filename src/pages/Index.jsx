@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, Text, Input, Button, Checkbox, Stack, FormControl, FormLabel, NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper, SimpleGrid, Image } from "@chakra-ui/react";
+import { Box, Flex, Heading, Text, Input, Button, Checkbox, Stack, FormControl, FormLabel, NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper, SimpleGrid, Image, Link } from "@chakra-ui/react";
 import { useState } from "react";
 
 const Index = () => {
@@ -63,6 +63,7 @@ const Index = () => {
               <Text>Rooms: {listing.rooms}</Text>
               <Text>Cleaning: {listing.cleaningRequired ? 'Required' : 'Not Required'}</Text>
               <Text>Bed Sheets: {listing.bedSheets ? 'Provided' : 'Not Provided'}</Text>
+              <Link color="teal.500" href="#">View Details</Link>
             </Box>
           ))}
         </SimpleGrid>
