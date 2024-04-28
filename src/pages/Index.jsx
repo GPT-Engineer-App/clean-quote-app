@@ -25,7 +25,7 @@ const Index = () => {
   return (
     <Flex direction="column" align="center" justify="center" h="100vh" p={4} bgImage="url('/images/landing-page-background.jpg')" bgSize="cover">
       <Box w="full" maxW="md" p={6} borderWidth="1px" borderRadius="lg" overflow="hidden" bg="white" shadow="lg">
-        <Heading mb={6}>List Your Apartment</Heading>
+        <Heading mb={6} color="teal.500">List Your Apartment</Heading>
         <Stack spacing={4}>
           <FormControl>
             <FormLabel htmlFor="address">Address</FormLabel>
@@ -61,7 +61,7 @@ const Index = () => {
         </Stack>
       </Box>
       <Box w="full" maxW="4xl" mt={10} bg="white" p={5} shadow="lg" borderRadius="lg">
-        <Heading mb={4}>Listings</Heading>
+        <Heading mb={4} color="teal.500">Listings</Heading>
         <SimpleGrid columns={3} spacing={10}>
           {listings.map((listing, index) => (
             <Box key={index} p={5} shadow="md" borderWidth="1px" borderRadius="lg">
